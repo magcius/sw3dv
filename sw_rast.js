@@ -129,7 +129,7 @@
 
         // Clamp to image bounds.
         minX = Math.max(minX, 0); minY = Math.max(minY, 0);
-        maxX = Math.min(maxX, ctx.canvas.width); maxY = Math.min(maxY, ctx.canvas.height);
+        maxX = Math.min(maxX, WIDTH); maxY = Math.min(maxY, HEIGHT);
 
         // Twice the tri's area.
         var area = (P3.y - P1.y) * (P2.x - P1.x) - (P2.y - P1.y) * (P3.x - P1.x);
@@ -191,7 +191,7 @@
         memset(buffer.depth, 0xFFFF);
 
         faces.forEach(function(face) { renderFace(buffer, face, points); });
-        ctx.putImageData(buffer.img, 0, 0);
+        buffer.ctx.putImageData(buffer.img, 0, 0);
 
         // renderPoints(buffer.ctx, points);
     }
@@ -281,6 +281,8 @@
         canvas.height = HEIGHT;
         document.body.appendChild(canvas);
         var ctx = canvas.getContext('2d');
+
+        init(ctx);
 
         function mainloop() {
             update(ctx);
