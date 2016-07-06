@@ -146,18 +146,21 @@
                 if (W1 < 0 || W2 < 0 || W3 < 0)
                     continue;
 
+                // Barycentric coordinates in clip space.
                 W1 /= area;
                 W2 /= area;
                 W3 /= area;
 
+                // Get our perspective-correct w.
+                var w = 1 / (1/P1.w*W1 + 1/P2.w*W2 + 1/P3.w*W3);
+
+                // Calculate vertex attributes.
                 var vtx = {};
-                for (var k in P1)
-                    vtx[k] = P1[k]*W1 + P2[k]*W2 + P3[k]*W3;
+                vtx.u = (P1.u/P1.w*W1 + P2.u/P2.w*W2 + P3.u/P3.w*W3) * w;
+                vtx.v = (P1.v/P1.w*W1 + P2.v/P2.w*W2 + P3.v/P3.w*W3) * w;
 
                 // Early depth test.
-                // Calculate Z.
                 var i = (y * img.width + x);
-
                 if (buffer.depth[i] < vtx.z)
                     continue;
 
@@ -242,8 +245,9 @@
             if (p.z <= 0)
                 p.z = 0.01;
 
-            p.x /= p.z;
-            p.y /= p.z;
+            p.w = p.z;
+            p.x /= p.w;
+            p.y /= p.w;
 
             p = scalePoint(p, +document.querySelector('#zoff').value);
 
