@@ -4,35 +4,35 @@
     var WIDTH = 400, HEIGHT = 400;
 
     var CUBE = [
-        { x: -1, y: -1, z: -1, u: 0, v: 0, },
-        { x:  1, y: -1, z: -1, u: 1, v: 0, },
-        { x:  1, y:  1, z: -1, u: 1, v: 1, },
-        { x: -1, y:  1, z: -1, u: 0, v: 1, },
+        { x: -1, y: -1, z: -1, attr: { u: 0, v: 0, } },
+        { x:  1, y: -1, z: -1, attr: { u: 1, v: 0, } },
+        { x:  1, y:  1, z: -1, attr: { u: 1, v: 1, } },
+        { x: -1, y:  1, z: -1, attr: { u: 0, v: 1, } },
 
-        { x:  1, y: -1, z: -1, u: 0, v: 0, },
-        { x:  1, y: -1, z:  1, u: 1, v: 0, },
-        { x:  1, y:  1, z:  1, u: 1, v: 1, },
-        { x:  1, y:  1, z: -1, u: 0, v: 1, },
+        { x:  1, y: -1, z: -1, attr: { u: 0, v: 0, } },
+        { x:  1, y: -1, z:  1, attr: { u: 1, v: 0, } },
+        { x:  1, y:  1, z:  1, attr: { u: 1, v: 1, } },
+        { x:  1, y:  1, z: -1, attr: { u: 0, v: 1, } },
 
-        { x:  1, y: -1, z: -1, u: 1, v: 0, },
-        { x: -1, y: -1, z: -1, u: 0, v: 0, },
-        { x: -1, y: -1, z:  1, u: 0, v: 1, },
-        { x:  1, y: -1, z:  1, u: 1, v: 1, },
+        { x:  1, y: -1, z: -1, attr: { u: 1, v: 0, } },
+        { x: -1, y: -1, z: -1, attr: { u: 0, v: 0, } },
+        { x: -1, y: -1, z:  1, attr: { u: 0, v: 1, } },
+        { x:  1, y: -1, z:  1, attr: { u: 1, v: 1, } },
 
-        { x:  1, y: -1, z:  1, u: 1, v: 0, },
-        { x: -1, y: -1, z:  1, u: 0, v: 0, },
-        { x: -1, y:  1, z:  1, u: 0, v: 1, },
-        { x:  1, y:  1, z:  1, u: 1, v: 1, },
+        { x:  1, y: -1, z:  1, attr: { u: 1, v: 0, } },
+        { x: -1, y: -1, z:  1, attr: { u: 0, v: 0, } },
+        { x: -1, y:  1, z:  1, attr: { u: 0, v: 1, } },
+        { x:  1, y:  1, z:  1, attr: { u: 1, v: 1, } },
 
-        { x: -1, y: -1, z:  1, u: 1, v: 0, },
-        { x: -1, y: -1, z: -1, u: 0, v: 0, },
-        { x: -1, y:  1, z: -1, u: 0, v: 1, },
-        { x: -1, y:  1, z:  1, u: 1, v: 1, },
+        { x: -1, y: -1, z:  1, attr: { u: 1, v: 0, } },
+        { x: -1, y: -1, z: -1, attr: { u: 0, v: 0, } },
+        { x: -1, y:  1, z: -1, attr: { u: 0, v: 1, } },
+        { x: -1, y:  1, z:  1, attr: { u: 1, v: 1, } },
 
-        { x: -1, y:  1, z: -1, u: 1, v: 0, },
-        { x:  1, y:  1, z: -1, u: 0, v: 0, },
-        { x:  1, y:  1, z:  1, u: 0, v: 1, },
-        { x: -1, y:  1, z:  1, u: 1, v: 1, },
+        { x: -1, y:  1, z: -1, attr: { u: 1, v: 0, } },
+        { x:  1, y:  1, z: -1, attr: { u: 0, v: 0, } },
+        { x:  1, y:  1, z:  1, attr: { u: 0, v: 1, } },
+        { x: -1, y:  1, z:  1, attr: { u: 1, v: 1, } },
     ];
 
     var CUBE_FACES = [
@@ -44,18 +44,6 @@
         [20, 21, 22, 23],
     ];
 
-    function renderPoint(ctx, x, y) {
-        var S = 4, hs = S/2;
-        ctx.fillStyle = '#000';
-        ctx.fillRect(x-hs, y-hs, S, S);
-    }
-
-    function renderPoints(ctx, points) {
-        points.forEach(function(p) {
-            renderPoint(ctx, p.x, p.y);
-        });
-    }
-
     function edgeFunction(ax, ay, bx, by, px, py) {
         // Put everything in the space of A.
         bx -= ax; by -= ay; px -= ax; py -= ay;
@@ -63,11 +51,13 @@
         return (bx * py - by * px);
     }
 
-    function mixColor(c, t) {
-        var r = ((c >>> 24) & 0xFF) * t;
-        var g = ((c >>> 16) & 0xFF) * t;
-        var b = ((c >>>  8) & 0xFF) * t;
-        var a = ((c >>>  0) & 0xFF);
+    function mixColor(ca, cb, t) {
+        var at = t, bt = 1-t;
+
+        var r = ((ca >>> 24) & 0xFF) * at + ((cb >>> 24) & 0xFF) * bt;
+        var g = ((ca >>> 16) & 0xFF) * at + ((cb >>> 16) & 0xFF) * bt;
+        var b = ((ca >>>  8) & 0xFF) * at + ((cb >>>  8) & 0xFF) * bt;
+        var a = ((ca >>>  0) & 0xFF) * at + ((cb >>>  0) & 0xFF) * bt;
         return r << 24 | g << 16 | b << 8 | a;
     }
 
@@ -136,42 +126,59 @@
 
         var img = buffer.img;
 
+        // Precompute inverses.
+        var P1_invW = 1/P1.w;
+        var P2_invW = 1/P2.w;
+        var P3_invW = 1/P3.w;
+
+        var AAA = 0;
         for (var y = minY; y < maxY; y++) {
             for (var x = minX; x < maxX; x++) {
-                var W1 = edgeFunction(E1x1, E1y1, E1x2, E1y2, x, y);
-                var W2 = edgeFunction(E2x1, E2y1, E2x2, E2y2, x, y);
-                var W3 = edgeFunction(E3x1, E3y1, E3x2, E3y2, x, y);
+                var E1 = edgeFunction(E1x1, E1y1, E1x2, E1y2, x, y);
+                var E2 = edgeFunction(E2x1, E2y1, E2x2, E2y2, x, y);
+                var E3 = edgeFunction(E3x1, E3y1, E3x2, E3y2, x, y);
 
                 // Inside our tri?
-                if (W1 < 0 || W2 < 0 || W3 < 0)
+                if (E1 < 0 || E2 < 0 || E3 < 0)
                     continue;
 
-                // Barycentric coordinates in clip space.
-                W1 /= area;
-                W2 /= area;
-                W3 /= area;
+                // Barycentric coordinates in clip space. Weights for
+                // how close we are to P1...
+                E1 /= area;
+                E2 /= area;
+                E3 /= area;
 
-                // Get our perspective-correct w.
-                var w = 1 / (1/P1.w*W1 + 1/P2.w*W2 + 1/P3.w*W3);
-
-                // Calculate vertex attributes.
-                var vtx = {};
-                vtx.u = (P1.u/P1.w*W1 + P2.u/P2.w*W2 + P3.u/P3.w*W3) * w;
-                vtx.v = (P1.v/P1.w*W1 + P2.v/P2.w*W2 + P3.v/P3.w*W3) * w;
+                // Compute Z, which we can linearly interpolate in screen space...
+                var Z = P1.z*E1 + P2.z*E2 + P3.z*E3;
+                // Convert to 16-bit.
+                Z = Z * 0xFFFF;
 
                 // Early depth test.
                 var i = (y * img.width + x);
-                if (buffer.depth[i] < vtx.z)
+                if (buffer.depth[i] < Z)
                     continue;
 
-                var p = shadePixel(vtx);
+                // Compute 1/P1.w*E1, etc.
+                var E1w = P1_invW*E1;
+                var E2w = P2_invW*E2;
+                var E3w = P3_invW*E3;
+
+                // Get our perspective-correct w.
+                var w = 1 / (E1w + E2w + E3w);
+
+                // Calculate vertex attributes.
+                var attr = {};
+                for (var k in P1.attr)
+                    attr[k] = (P1.attr[k]*E1w + P2.attr[k]*E2w + P3.attr[k]*E3w) * w; 
+
+                var p = shadePixel(attr);
 
                 var idx = i * 4;
                 img.data[idx + 0] = (p >>> 24) & 0xFF;
                 img.data[idx + 1] = (p >>> 16) & 0xFF;
                 img.data[idx + 2] = (p >>> 8) & 0xFF;
                 img.data[idx + 3] = p & 0xFF;
-                buffer.depth[i] = vtx.z;
+                buffer.depth[i] = Z;
             }
         }
     }
@@ -188,15 +195,25 @@
         for (var i = 0; i < b.length; i++) b[i] = v;
     }
 
+    function renderDepth(buffer, img) {
+        var o = 0;
+        for (var i = 0; i < buffer.length; i++) {
+            var v = (buffer[i] / 0xFFFF) * 0xFF;
+            img.data[o++] = v;
+            img.data[o++] = v;
+            img.data[o++] = v;
+            img.data[o++] = 255;
+        }
+    }
+
     function renderModel(buffer, faces, points) {
         // Clear.
         memset(buffer.img.data, 0);
         memset(buffer.depth, 0xFFFF);
 
         faces.forEach(function(face) { renderFace(buffer, face, points); });
+        // renderDepth(buffer.depth, buffer.img)
         buffer.ctx.putImageData(buffer.img, 0, 0);
-
-        // renderPoints(buffer.ctx, points);
     }
 
     function copy(o, n) {
@@ -249,11 +266,20 @@
             p.x /= p.w;
             p.y /= p.w;
 
+            // The near plane is at 0, the far plane is at 10.
+            var FAR_PLANE = 10;
+            // Depth remap to [0-1].
+            var Z = p.z / FAR_PLANE;
+            // Clamp.
+            Z = Math.min(Math.max(Z, 0), 1);
+
             p = scalePoint(p, +document.querySelector('#zoff').value);
 
             // So we can see the point...
             p = scalePoint(p, 80);
             p = translatePoint(p, 200, 200, 200);
+
+            p.z = Z;
 
             return p;
         });
