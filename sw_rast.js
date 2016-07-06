@@ -4,36 +4,42 @@
     var WIDTH = 400, HEIGHT = 400;
 
     var CUBE = [
-        { x: -1, y: -1, z: -1, attr: { u: 0, v: 0, r: 0xFF, g: 0x00, b: 0x00 } },
-        { x:  1, y: -1, z: -1, attr: { u: 1, v: 0, r: 0x00, g: 0xFF, b: 0x00 } },
-        { x:  1, y:  1, z: -1, attr: { u: 1, v: 1, r: 0x00, g: 0x00, b: 0xFF } },
-        { x: -1, y:  1, z: -1, attr: { u: 0, v: 1, r: 0xFF, g: 0x00, b: 0xFF } },
+        { x: -1, y: -1, z: -1, attr: { u: 0, v: 0, } },
+        { x:  1, y: -1, z: -1, attr: { u: 1, v: 0, } },
+        { x:  1, y:  1, z: -1, attr: { u: 1, v: 1, } },
+        { x: -1, y:  1, z: -1, attr: { u: 0, v: 1, } },
 
-        { x:  1, y: -1, z: -1, attr: { u: 0, v: 0, r: 0x00, g: 0xFF, b: 0xFF } },
-        { x:  1, y: -1, z:  1, attr: { u: 1, v: 0, r: 0xFF, g: 0x00, b: 0xFF } },
-        { x:  1, y:  1, z:  1, attr: { u: 1, v: 1, r: 0x00, g: 0xFF, b: 0xFF } },
-        { x:  1, y:  1, z: -1, attr: { u: 0, v: 1, r: 0xFF, g: 0x00, b: 0xFF } },
+        { x:  1, y: -1, z: -1, attr: { u: 0, v: 0, } },
+        { x:  1, y: -1, z:  1, attr: { u: 1, v: 0, } },
+        { x:  1, y:  1, z:  1, attr: { u: 1, v: 1, } },
+        { x:  1, y:  1, z: -1, attr: { u: 0, v: 1, } },
 
-        { x:  1, y: -1, z: -1, attr: { u: 1, v: 0, r: 0xFF, g: 0x00, b: 0x00 } },
-        { x: -1, y: -1, z: -1, attr: { u: 0, v: 0, r: 0xFF, g: 0xFF, b: 0x00 } },
-        { x: -1, y: -1, z:  1, attr: { u: 0, v: 1, r: 0xFF, g: 0xFF, b: 0xFF } },
-        { x:  1, y: -1, z:  1, attr: { u: 1, v: 1, r: 0x00, g: 0xFF, b: 0xFF } },
+        { x:  1, y: -1, z: -1, attr: { u: 1, v: 0, } },
+        { x: -1, y: -1, z: -1, attr: { u: 0, v: 0, } },
+        { x: -1, y: -1, z:  1, attr: { u: 0, v: 1, } },
+        { x:  1, y: -1, z:  1, attr: { u: 1, v: 1, } },
 
-        { x:  1, y: -1, z:  1, attr: { u: 1, v: 0, r: 0xFF, g: 0x00, b: 0xFF } },
-        { x: -1, y: -1, z:  1, attr: { u: 0, v: 0, r: 0x00, g: 0xFF, b: 0xFF } },
-        { x: -1, y:  1, z:  1, attr: { u: 0, v: 1, r: 0xFF, g: 0x00, b: 0xFF } },
-        { x:  1, y:  1, z:  1, attr: { u: 1, v: 1, r: 0x00, g: 0xFF, b: 0xFF } },
+        { x:  1, y: -1, z:  1, attr: { u: 1, v: 0, } },
+        { x: -1, y: -1, z:  1, attr: { u: 0, v: 0, } },
+        { x: -1, y:  1, z:  1, attr: { u: 0, v: 1, } },
+        { x:  1, y:  1, z:  1, attr: { u: 1, v: 1, } },
 
-        { x: -1, y: -1, z:  1, attr: { u: 1, v: 0, r: 0xFF, g: 0xFF, b: 0xFF } },
-        { x: -1, y: -1, z: -1, attr: { u: 0, v: 0, r: 0xFF, g: 0xFF, b: 0xFF } },
-        { x: -1, y:  1, z: -1, attr: { u: 0, v: 1, r: 0xFF, g: 0xFF, b: 0xFF } },
-        { x: -1, y:  1, z:  1, attr: { u: 1, v: 1, r: 0xFF, g: 0xFF, b: 0xFF } },
+        { x: -1, y: -1, z:  1, attr: { u: 1, v: 0, } },
+        { x: -1, y: -1, z: -1, attr: { u: 0, v: 0, } },
+        { x: -1, y:  1, z: -1, attr: { u: 0, v: 1, } },
+        { x: -1, y:  1, z:  1, attr: { u: 1, v: 1, } },
 
-        { x: -1, y:  1, z: -1, attr: { u: 1, v: 0, r: 0xFF, g: 0x00, b: 0x00 } },
-        { x:  1, y:  1, z: -1, attr: { u: 0, v: 0, r: 0x00, g: 0xFF, b: 0xFF } },
-        { x:  1, y:  1, z:  1, attr: { u: 0, v: 1, r: 0x00, g: 0xFF, b: 0x00 } },
-        { x: -1, y:  1, z:  1, attr: { u: 1, v: 1, r: 0x00, g: 0xFF, b: 0x00 } },
+        { x: -1, y:  1, z: -1, attr: { u: 1, v: 0, } },
+        { x:  1, y:  1, z: -1, attr: { u: 0, v: 0, } },
+        { x:  1, y:  1, z:  1, attr: { u: 0, v: 1, } },
+        { x: -1, y:  1, z:  1, attr: { u: 1, v: 1, } },
     ];
+
+    CUBE.forEach(function(p) {
+        p.attr.r = (p.x + 1) / 2.0 * 0xFF;
+        p.attr.g = (p.y + 1) / 2.0 * 0xFF;
+        p.attr.b = (p.z + 1) / 2.0 * 0xFF;
+    });
 
     var CUBE_FACES = [
         [0, 1, 2, 3],
