@@ -4,35 +4,35 @@
     var WIDTH = 400, HEIGHT = 400;
 
     var CUBE = [
-        { x: -1, y: -1, z: -1, attr: { u: 0, v: 0, } },
-        { x:  1, y: -1, z: -1, attr: { u: 1, v: 0, } },
-        { x:  1, y:  1, z: -1, attr: { u: 1, v: 1, } },
-        { x: -1, y:  1, z: -1, attr: { u: 0, v: 1, } },
+        { x: -1, y: -1, z: -1, attr: { u: 0, v: 0, r: 0xFF, g: 0x00, b: 0x00 } },
+        { x:  1, y: -1, z: -1, attr: { u: 1, v: 0, r: 0x00, g: 0xFF, b: 0x00 } },
+        { x:  1, y:  1, z: -1, attr: { u: 1, v: 1, r: 0x00, g: 0x00, b: 0xFF } },
+        { x: -1, y:  1, z: -1, attr: { u: 0, v: 1, r: 0xFF, g: 0x00, b: 0xFF } },
 
-        { x:  1, y: -1, z: -1, attr: { u: 0, v: 0, } },
-        { x:  1, y: -1, z:  1, attr: { u: 1, v: 0, } },
-        { x:  1, y:  1, z:  1, attr: { u: 1, v: 1, } },
-        { x:  1, y:  1, z: -1, attr: { u: 0, v: 1, } },
+        { x:  1, y: -1, z: -1, attr: { u: 0, v: 0, r: 0x00, g: 0x00, b: 0x00 } },
+        { x:  1, y: -1, z:  1, attr: { u: 1, v: 0, r: 0x00, g: 0x00, b: 0x00 } },
+        { x:  1, y:  1, z:  1, attr: { u: 1, v: 1, r: 0x00, g: 0x00, b: 0x00 } },
+        { x:  1, y:  1, z: -1, attr: { u: 0, v: 1, r: 0x00, g: 0x00, b: 0x00 } },
 
-        { x:  1, y: -1, z: -1, attr: { u: 1, v: 0, } },
-        { x: -1, y: -1, z: -1, attr: { u: 0, v: 0, } },
-        { x: -1, y: -1, z:  1, attr: { u: 0, v: 1, } },
-        { x:  1, y: -1, z:  1, attr: { u: 1, v: 1, } },
+        { x:  1, y: -1, z: -1, attr: { u: 1, v: 0, r: 0x00, g: 0x00, b: 0x00 } },
+        { x: -1, y: -1, z: -1, attr: { u: 0, v: 0, r: 0x00, g: 0x00, b: 0x00 } },
+        { x: -1, y: -1, z:  1, attr: { u: 0, v: 1, r: 0x00, g: 0x00, b: 0x00 } },
+        { x:  1, y: -1, z:  1, attr: { u: 1, v: 1, r: 0x00, g: 0x00, b: 0x00 } },
 
-        { x:  1, y: -1, z:  1, attr: { u: 1, v: 0, } },
-        { x: -1, y: -1, z:  1, attr: { u: 0, v: 0, } },
-        { x: -1, y:  1, z:  1, attr: { u: 0, v: 1, } },
-        { x:  1, y:  1, z:  1, attr: { u: 1, v: 1, } },
+        { x:  1, y: -1, z:  1, attr: { u: 1, v: 0, r: 0x00, g: 0x00, b: 0x00 } },
+        { x: -1, y: -1, z:  1, attr: { u: 0, v: 0, r: 0x00, g: 0x00, b: 0x00 } },
+        { x: -1, y:  1, z:  1, attr: { u: 0, v: 1, r: 0x00, g: 0x00, b: 0x00 } },
+        { x:  1, y:  1, z:  1, attr: { u: 1, v: 1, r: 0x00, g: 0x00, b: 0x00 } },
 
-        { x: -1, y: -1, z:  1, attr: { u: 1, v: 0, } },
-        { x: -1, y: -1, z: -1, attr: { u: 0, v: 0, } },
-        { x: -1, y:  1, z: -1, attr: { u: 0, v: 1, } },
-        { x: -1, y:  1, z:  1, attr: { u: 1, v: 1, } },
+        { x: -1, y: -1, z:  1, attr: { u: 1, v: 0, r: 0x00, g: 0x00, b: 0x00 } },
+        { x: -1, y: -1, z: -1, attr: { u: 0, v: 0, r: 0x00, g: 0x00, b: 0x00 } },
+        { x: -1, y:  1, z: -1, attr: { u: 0, v: 1, r: 0x00, g: 0x00, b: 0x00 } },
+        { x: -1, y:  1, z:  1, attr: { u: 1, v: 1, r: 0x00, g: 0x00, b: 0x00 } },
 
-        { x: -1, y:  1, z: -1, attr: { u: 1, v: 0, } },
-        { x:  1, y:  1, z: -1, attr: { u: 0, v: 0, } },
-        { x:  1, y:  1, z:  1, attr: { u: 0, v: 1, } },
-        { x: -1, y:  1, z:  1, attr: { u: 1, v: 1, } },
+        { x: -1, y:  1, z: -1, attr: { u: 1, v: 0, r: 0x00, g: 0x00, b: 0x00 } },
+        { x:  1, y:  1, z: -1, attr: { u: 0, v: 0, r: 0x00, g: 0x00, b: 0x00 } },
+        { x:  1, y:  1, z:  1, attr: { u: 0, v: 1, r: 0x00, g: 0x00, b: 0x00 } },
+        { x: -1, y:  1, z:  1, attr: { u: 1, v: 1, r: 0x00, g: 0x00, b: 0x00 } },
     ];
 
     var CUBE_FACES = [
@@ -53,12 +53,10 @@
 
     function mixColor(ca, cb, t) {
         var at = t, bt = 1-t;
-
         var r = ((ca >>> 24) & 0xFF) * at + ((cb >>> 24) & 0xFF) * bt;
         var g = ((ca >>> 16) & 0xFF) * at + ((cb >>> 16) & 0xFF) * bt;
         var b = ((ca >>>  8) & 0xFF) * at + ((cb >>>  8) & 0xFF) * bt;
-        var a = ((ca >>>  0) & 0xFF) * at + ((cb >>>  0) & 0xFF) * bt;
-        return r << 24 | g << 16 | b << 8 | a;
+        return r << 24 | g << 16 | b << 8;
     }
 
     function loadImage(src) {
@@ -94,8 +92,9 @@
     }
 
     function shadePixel(vtx) {
-        // Albedo
-        var color = texture2D(crate.load(), vtx.u, vtx.v);
+        var texColor = texture2D(crate.load(), vtx.u, vtx.v);
+        var vtxColor = vtx.r << 24 | vtx.g << 16 | vtx.b;
+        var color = mixColor(texColor, vtxColor, .5);
 
         return color | 0x000000FF;
     }
@@ -131,7 +130,6 @@
         var P2_invW = 1/P2.w;
         var P3_invW = 1/P3.w;
 
-        var AAA = 0;
         for (var y = minY; y < maxY; y++) {
             for (var x = minX; x < maxX; x++) {
                 var E1 = edgeFunction(E1x1, E1y1, E1x2, E1y2, x, y);
@@ -216,13 +214,16 @@
         buffer.ctx.putImageData(buffer.img, 0, 0);
     }
 
-    function copy(o, n) {
+    function copy(o) {
         var x = {};
         for (var i in o)
             x[i] = o[i];
-        for (var i in n)
-            x[i] = n[i];
         return x;
+    }
+
+    function set(o, n) {
+        for (var k in n)
+            o[k] = n[k];
     }
 
     function rotateX(p, a) {
@@ -230,7 +231,7 @@
             cos = Math.cos(a);
         var ry = p.y * cos - p.z * sin;
         var rz = p.y * sin + p.z * cos;
-        return copy(p, { y: ry, z: rz });
+        return set(p, { y: ry, z: rz });
     }
 
     function rotateY(p, a) {
@@ -238,25 +239,27 @@
             cos = Math.cos(a);
         var rx =  p.x * cos + p.z * sin;
         var rz = -p.x * sin + p.z * cos;
-        return copy(p, { x: rx, z: rz });
+        return set(p, { x: rx, z: rz });
     }
 
     function scalePoint(p, m) {
-        return copy(p, { x: p.x * m, y: p.y * m, z: p.z * m });
+        return set(p, { x: p.x * m, y: p.y * m, z: p.z * m });
     }
 
     function translatePoint(p, tx, ty, tz) {
-        return copy(p, { x: p.x + tx, y: p.y + ty, z: p.z + tz });
+        return set(p, { x: p.x + tx, y: p.y + ty, z: p.z + tz });
     }
 
     function transform(points) {
-        points = points.map(function(p) {
+        return points.map(function(p) {
+            p = copy(p);
+
             // Make it look cool by rotating it around...
-            p = rotateY(p, angle);
-            p = rotateX(p, angle * 0.7);
+            rotateY(p, angle);
+            rotateX(p, angle * 0.7);
 
             // So we're not in the immediate center of it.
-            p = translatePoint(p, 0, 0, +document.querySelector('#zoff').value);
+            translatePoint(p, 0, 0, +document.querySelector('#zoff').value);
 
             // Perspective divide!
             if (p.z <= 0)
@@ -273,18 +276,16 @@
             // Clamp.
             Z = Math.min(Math.max(Z, 0), 1);
 
-            p = scalePoint(p, +document.querySelector('#zoff').value);
+            scalePoint(p, +document.querySelector('#zoff').value);
 
             // So we can see the point...
-            p = scalePoint(p, 80);
-            p = translatePoint(p, 200, 200, 200);
+            scalePoint(p, 80);
+            translatePoint(p, 200, 200, 200);
 
             p.z = Z;
 
             return p;
         });
-
-        return points;
     }
 
     var angle = 0.25;
