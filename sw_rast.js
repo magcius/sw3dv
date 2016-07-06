@@ -93,7 +93,7 @@
 
     function shadePixel(vtx) {
         var texColor = texture2D(crate.load(), vtx.u, vtx.v);
-        var vtxColor = vtx.r << 24 | vtx.g << 16 | vtx.b;
+        var vtxColor = vtx.r << 24 | vtx.g << 16 | vtx.b << 8;
         var color = mixColor(texColor, vtxColor, .5);
 
         return color | 0x000000FF;
